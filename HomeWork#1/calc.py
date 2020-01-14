@@ -33,6 +33,7 @@ def get_operator(number_1, number_2, operation):
             '-': operator.sub(number_1, number_2),
             '*': operator.mul(number_1, number_2),
             '/': operator.truediv(number_1, number_2),
+            '%': operator.mod(number_1, number_2),
             '**': operator.pow(number_1, number_2),
             '//': operator.floordiv(number_1, number_2)
         }[operation]
@@ -49,7 +50,7 @@ def calc(answer):
         try:
             number_1, number_2 = int(input(f"Enter first number,{random.choice(creature)} ")), int(
                 input(f"Enter second number,{random.choice(creature)} "))
-            operation = input("Choose operation: +, -, *, /, **, //. And then hope to get out of here alive. ")
+            operation = input("Choose operation: +, -, *, /, %, **, //. And then hope to get out of here alive. ")
             result = get_operator(number_1, number_2, operation)
             if result is not None:
                 print(f"BEHOLD MY POWER!\n{number_1} {operation} {number_2} = {result}")
