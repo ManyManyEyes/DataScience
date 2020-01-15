@@ -48,5 +48,5 @@ def calc(answer):
 answer = str(input("Do you want calculation?(Y/N) "))
 calc(answer)
 while True:
-    answer_again = str(input("Do you want calculation? again?(Y/N) "))
+    answer_again = str(input("Do you want calculation again?(Y/N) "))
     calc(answer_again)
