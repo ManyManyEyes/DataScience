@@ -1,3 +1,3 @@
-python parser.py 
+python redactor.py 
 
 
