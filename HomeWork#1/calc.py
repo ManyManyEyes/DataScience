@@ -1,4 +1,3 @@
-import time
 import operator
 
 
@@ -38,11 +37,11 @@ def calc(answer):
 
     elif answer.upper() == "N":
         print("Exit")
-        time.sleep(1)
         exit()
 
     elif answer.upper != "N" or "Y":
         invalid_command()
+
 
 if __name__ == "__main__":
     answer = str(input("Do you want calculation?(Y/N) "))
