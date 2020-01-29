@@ -23,29 +23,27 @@ class Carriage:
 
         self.volume = self.height * self.width * self.length
         self.carrying = self.volume * 750
+        self.storage = []
 
-    def load(self, load, quantity):
-        volume_left = self.volume
-        carrying_left = self.carrying
-        i = 1
-        for batch in range(quantity):
-            if volume_left < load.volume:
-                print(f"The box {i} will not fit: box volume {load.volume}, remaining volume in the carriage {volume_left}")
-                break
-            if carrying_left < load.mass:
-                print(f"The box {i} will not fit: box mass {load.mass}, remaining carrying in the carriage {carrying_left}")
-                break
-            volume_left = volume_left - load.volume
-            carrying_left = carrying_left - load.mass
+    def load(self, load):
+        if self.volume < load.volume or self.carrying < load.mass:
+            print(f"The box {i} will not fit: box {load.volume or load.mass}, remaining in the carriage {self.volume or self.carrying}")
+            exit()
+        else:
+            self.volume = self.volume - load.volume
+            self.carrying = self.carrying - load.mass
+            self.storage.append(load)
             print(f"""The box {i} is shipped. Box parameters: 
             height: {load.height} 
             weight: {load.width}
             length: {load.length} 
             volume: {load.volume}
             mass: {load.mass}
-            Left volume in the carriage {volume_left}, left carrying in the carriage {carrying_left}""")
-            i += 1
+            Left volume in the carriage {self.volume}, left carrying in the carriage {self.carrying}
+            Boxes in carriage: {len(self.storage)}""")
 
 
 if __name__ == '__main__':
-    Carriage().load(Box(), 10)
+    vagon = Carriage()
+    for i in range(1, 11):
+        vagon.load(Box())
