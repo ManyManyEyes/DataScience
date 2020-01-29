@@ -48,5 +48,4 @@ class Carriage:
 
 
 if __name__ == '__main__':
-    Vagon = Carriage()
-    Vagon.load(Box(), 10)
+    Carriage().load(Box(), 10)
