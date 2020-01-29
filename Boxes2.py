@@ -25,29 +25,26 @@ class Carriage:
         self.carrying = self.volume * 750
         self.storage = []
 
-    def load(self):
+    def load(self, load):
         volume_left = self.volume
         carrying_left = self.carrying
-        i = 1
-        for batch in storage:
-            if volume_left < load.volume:
-                print(f"The box {i} will not fit: box volume {load.volume}, remaining volume in the carriage {volume_left}")
-                break
-            if carrying_left < load.mass:
-                print(f"The box {i} will not fit: box mass {load.mass}, remaining carrying in the carriage {carrying_left}")
-                break
-            volume_left = volume_left - load.volume
-            carrying_left = carrying_left - load.mass
-            print(f"""The box {i} is shipped. Box parameters: 
-            height: {load.height} 
-            weight: {load.width}
-            length: {load.length} 
-            volume: {load.volume}
-            mass: {load.mass}
-            Left volume in the carriage {volume_left}, left carrying in the carriage {carrying_left}""")
-            i += 1
+        if volume_left < load.volume:
+            print(f"The box {i} will not fit: box volume {load.volume}, remaining volume in the carriage {volume_left}")
+        if carrying_left < load.mass:
+            print(f"The box {i} will not fit: box mass {load.mass}, remaining carrying in the carriage {carrying_left}")
+        volume_left = volume_left - load.volume
+        carrying_left = carrying_left - load.mass
+        print(f"""The box {i} is shipped. Box parameters: 
+        height: {load.height} 
+        weight: {load.width}
+        length: {load.length} 
+        volume: {load.volume}
+        mass: {load.mass}
+        Left volume in the carriage {volume_left}, left carrying in the carriage {carrying_left}""")
+        self.storage.append(load)
 
 
 if __name__ == '__main__':
-    Carriage.storage = Box()
-    Carriage.load()
+    vagon = Carriage()
+    for i in range(10):
+        vagon.load(Box())
