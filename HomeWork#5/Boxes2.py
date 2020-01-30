@@ -16,12 +16,11 @@ class Box:
 
     @classmethod
     def create(cls):
-        height = gen(0.1, 3.0)
-        length = gen(0.1, 10.0)
-        width = gen(0.1, 3.0)
-        volume = height*length*width
-        mass = volume*gen(1.0, 3.0)
-        print(cls, height, length, width, volume, mass)
+        self._height = gen(0.1, 3.0)
+        self._length = gen(0.1, 10.0)
+        self._width = gen(0.1, 3.0)
+        self._volume = height*length*width
+        self._mass = volume*gen(1.0, 3.0)
 
 
     @property
