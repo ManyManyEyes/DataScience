@@ -26,14 +26,18 @@ class Box:
     @property
     def height(self):
         return self._height
+    @property
     def length(self):
         return self._length
+    @property
     def width(self):
         return self._width
-    def mass(self):
-        return self._mass
+    @property
     def volume(self):
         return self._volume
+    @property
+    def mass(self):
+        return self._mass
 
 
 class Carriage:
@@ -46,22 +50,24 @@ class Carriage:
         self.storage = []
         self.status = closed
 
+        
     @property
     def height(self):
         return self._height
-
+    @property
     def length(self):
         return self._length
-
+    @property
     def width(self):
         return self._width
-
+    @property
     def carrying(self):
         return self._carrying
-
+    @property
     def volume(self):
         return self._volume
-
+    
+    
     def check(self, cargo):
         if cargo.height <= self.height
             if cargo.length <= self.length
