@@ -11,17 +11,17 @@ class Box:
         self._length = length
         self._width = width
         self._mass = mass
-        self._volume = height*length*width
-
+        self._volume = height * length * width
 
     @classmethod
     def create(cls):
-        self._height = gen(0.1, 3.0)
-        self._length = gen(0.1, 10.0)
-        self._width = gen(0.1, 3.0)
-        self._volume = height*length*width
-        self._mass = volume*gen(1.0, 3.0)
-
+        height = gen(0.1, 3.0)
+        length = gen(0.1, 10.0)
+        width = gen(0.1, 3.0)
+        volume = height * length * width
+        mass = volume * gen(1.0, 3.0)
+        cargo = cls(height, length, width, mass, volume)
+        return cargo
 
     @property
     def height(self):
@@ -42,32 +42,35 @@ class Carriage:
         self._length = length
         self._width = width
         self._carrying = carrying
-        self._volume = height*length*width
+        self._volume = height * length * width
         self.storage = []
         self.status = closed
 
     @property
     def height(self):
         return self._height
+
     def length(self):
         return self._length
+
     def width(self):
         return self._width
+
     def carrying(self):
         return self._carrying
+
     def volume(self):
         return self._volume
 
-
-    def check(self,cargo):
-        if cargo.height<=self.height
-        if cargo.length<=self.length
-        if cargo.width<=self.width
-        
+    def check(self, cargo):
+        if cargo.height <= self.height
+            if cargo.length <= self.length
+                if cargo.width <= self.width
 
     def load(self, load):
         if self.volume < load.volume or self.carrying < load.mass:
-            print(f"The box {i} will not fit: box {load.volume or load.mass}, remaining in the carriage {self.volume or self.carrying}")
+            print(
+                f"The box {i} will not fit: box {load.volume or load.mass}, remaining in the carriage {self.volume or self.carrying}")
             exit()
         else:
             self.volume = self.volume - load.volume
@@ -86,4 +89,4 @@ class Carriage:
 if __name__ == '__main__':
     Box.create
     Box.create()
-    
+
