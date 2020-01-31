@@ -69,9 +69,11 @@ class Carriage:
     
     
     def check(self, cargo):
-        if cargo.height <= self.height
-            if cargo.length <= self.length
-                if cargo.width <= self.width
+        cargo.height <= self.height
+        cargo.length <= self.length
+        cargo.width <= self.width
+        cargo
+        
 
     def load(self, load):
         if self.volume < load.volume or self.carrying < load.mass:
