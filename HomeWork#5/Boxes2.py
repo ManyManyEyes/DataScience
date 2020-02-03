@@ -5,13 +5,13 @@ def gen(a, b):
     return random.uniform(a, b)
 
 
-class Box:
+class Cargo:
     def __init__(self, height, length, width, mass):
         self._height = height
         self._length = length
         self._width = width
         self._mass = mass
-        self._volume = height * length * width
+        self._volume = self._height * self._length * self._width
 
     @classmethod
     def create(cls):
@@ -46,9 +46,11 @@ class Carriage:
         self._length = length
         self._width = width
         self._carrying = carrying
-        self._volume = height * length * width
-        self.storage = []
-        self.status = closed
+        self._volume = self._height * self._length * self._width
+        self.carrying_available = self._carrying
+        self.volume_available = self._volume
+        self.cargo_list = []
+        self.storage_list = []
 
         
     @property
@@ -66,35 +68,48 @@ class Carriage:
     @property
     def volume(self):
         return self._volume
+    @property
+    def carrying_available(self):
+        return self.carrying_available
+    @property
+    def volume_available(self):
+        return self.volume_available
+    @property
+    def cargo_list(self):
+        return self.cargo_list
+    @property
+    def storage_list(self):
+        return self.storage_list
     
     
     def check(self, cargo):
-        cargo.height <= self.height
-        cargo.length <= self.length
-        cargo.width <= self.width
-        cargo
-        
-
-    def load(self, load):
-        if self.volume < load.volume or self.carrying < load.mass:
-            print(
-                f"The box {i} will not fit: box {load.volume or load.mass}, remaining in the carriage {self.volume or self.carrying}")
-            exit()
+        if cargo._height >= self.height\
+        or cargo._length >= self.length\
+        or cargo._width >= self.width\
+        or cargo._volume >= self._volume_available\
+        or cargo._mass >=self._carrying_available:
+            return False
         else:
-            self.volume = self.volume - load.volume
-            self.carrying = self.carrying - load.mass
-            self.storage.append(load)
-            print(f"""The box {i} is shipped. Box parameters: 
-            height: {load.height} 
-            weight: {load.width}
-            length: {load.length} 
-            volume: {load.volume}
-            mass: {load.mass}
-            Left volume in the carriage {self.volume}, left carrying in the carriage {self.carrying}
-            Boxes in carriage: {len(self.storage)}""")
+            return True
+                    
+    def load(self, cargo):
+        if self.check(cargo) is not False:
+            self.cargo_list.append(cargo)
+            self._carrying_available-=cargo._mass
+            self._volume_available-=cargo._volume
+        else:
+            self.storage_list.append(cargo)
+
+    def drop(self, cargo):
+        self._carrying_available+=cargo._mass
+        self._volume_available+=cargo._volume
+        cargo = self._cargo_list.pop
+        self._storage_list.append(cargo)
 
 
 if __name__ == '__main__':
-    Box.create
-    Box.create()
 
+    Box = Cargo(5,5,5,125)
+    Vagon = Carriage(10,10,10,100)
+    Vagon.load(Box)
+    Vagon.drop(Box)
