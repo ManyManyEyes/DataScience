@@ -3,7 +3,7 @@ import random
 
 def gen(a, b):
     return random.uniform(a, b)
-
+storage_list = []
 
 class Cargo:
     def __init__(self, height, length, width, mass):
@@ -11,7 +11,7 @@ class Cargo:
         self._length = length
         self._width = width
         self._mass = mass
-        self._volume = self.height * self.length * self.width
+        self._volume = self._height * self._length * self._width
 
     @classmethod
     def create(cls):
@@ -20,30 +20,52 @@ class Cargo:
         width = gen(0.1, 3.0)
         volume = height * length * width
         mass = volume * gen(1.0, 3.0)
-        cargo = cls(height, length, width, mass)
-        return cargo
+        return cls(height, length, width, mass)
 
     @property
     def height(self):
-        return self.height
+        return self._height
 
     @property
     def length(self):
-        return self.length
+        return self._length
 
     @property
     def width(self):
-        return self.width
+        return self._width
 
     @property
     def volume(self):
-        return self.volume
+        return self._volume
 
     @property
     def mass(self):
-        return self.mass
+        return self._mass
 
-
+class Box(Cargo):
+    def info(self,cls):
+        print(f'height:{self.height}',
+              f'length:{self.length}',
+              f'width:{self.width}',
+              f'volume:{self.volume}',
+              f'mass:{self.mass}')
+        
+class Fridge(Cargo):
+    def info(self):
+        print(f'height:{self._height}',
+              f'length:{self._length}',
+              f'width:{self._width}',
+              f'volume:{self._volume}',
+              f'mass:{self._mass}')
+    
+class Table(Cargo):
+    def info(self):
+        print(f'height:{self._height}',
+              f'length:{self._length}',
+              f'width:{self._width}',
+              f'volume:{self._volume}',
+              f'mass:{self._mass}')
+    
 class Carriage:
     def __init__(self, height, length, width, carrying):
         self._height = height
@@ -54,43 +76,49 @@ class Carriage:
         self._carrying_available = self._carrying
         self._volume_available = self._volume
         self._cargo_list = []
-        self._storage_list = []
+        self._open_door = False
+        self._ready_status = False
 
     @property
     def height(self):
-        return self.height
+        return self._height
 
     @property
     def length(self):
-        return self.length
+        return self._length
 
     @property
     def width(self):
-        return self.width
+        return self._width
 
     @property
     def carrying(self):
-        return self.carrying
+        return self._carrying
 
     @property
     def volume(self):
-        return self.volume
+        return self._volume
 
     @property
     def carrying_available(self):
-        return self.carrying_available
+        return self._carrying_available
 
     @property
     def volume_available(self):
-        return self.volume_available
+        return self._volume_available
 
     @property
     def cargo_list(self):
-        return self.cargo_list
+        return self._cargo_list
 
     @property
-    def storage_list(self):
-        return self.storage_list
+    def open_door(self):
+        return self._open_door
+
+    @property
+    def ready_status(self):
+        return self._ready_status
+
 
     def check(self, cargo):
         return cargo.height <= self.height and cargo.length <= self.length and cargo.width <= self.width and \
@@ -101,18 +129,16 @@ class Carriage:
             self.cargo_list.append(cargo)
             self._carrying_available -= cargo.mass
             self._volume_available -= cargo.volume
-        else:
-            self.storage_list.append(cargo)
+
 
     def drop(self, cargo):
         self._carrying_available += cargo.mass
         self._volume_available += cargo.volume
         cargo = self.cargo_list.pop
-        self.storage_list.append(cargo)
 
 
 if __name__ == '__main__':
-    Box = Cargo(5, 5, 5, 125)
+    Box1 = Box(5, 5, 5, 25)
+    Box1.info
+    Box1.info(Box(5,5,5,25))
     Vagon = Carriage(10, 10, 10, 100)
-    Vagon.load(Box)
-    Vagon.drop(Box)
