@@ -11,7 +11,7 @@ class Cargo:
         self._length = length
         self._width = width
         self._mass = mass
-        self._volume = self._height * self._length * self._width
+        self._volume = self.height * self.length * self.width
 
     @classmethod
     def create(cls):
@@ -20,24 +20,28 @@ class Cargo:
         width = gen(0.1, 3.0)
         volume = height * length * width
         mass = volume * gen(1.0, 3.0)
-        cargo = cls(height, length, width, mass, volume)
+        cargo = cls(height, length, width, mass)
         return cargo
 
     @property
     def height(self):
-        return self._height
+        return self.height
+
     @property
     def length(self):
-        return self._length
+        return self.length
+
     @property
     def width(self):
-        return self._width
+        return self.width
+
     @property
     def volume(self):
-        return self._volume
+        return self.volume
+
     @property
     def mass(self):
-        return self._mass
+        return self.mass
 
 
 class Carriage:
@@ -47,69 +51,68 @@ class Carriage:
         self._width = width
         self._carrying = carrying
         self._volume = self._height * self._length * self._width
-        self.carrying_available = self._carrying
-        self.volume_available = self._volume
-        self.cargo_list = []
-        self.storage_list = []
+        self._carrying_available = self._carrying
+        self._volume_available = self._volume
+        self._cargo_list = []
+        self._storage_list = []
 
-        
     @property
     def height(self):
-        return self._height
+        return self.height
+
     @property
     def length(self):
-        return self._length
+        return self.length
+
     @property
     def width(self):
-        return self._width
+        return self.width
+
     @property
     def carrying(self):
-        return self._carrying
+        return self.carrying
+
     @property
     def volume(self):
-        return self._volume
+        return self.volume
+
     @property
     def carrying_available(self):
         return self.carrying_available
+
     @property
     def volume_available(self):
         return self.volume_available
+
     @property
     def cargo_list(self):
         return self.cargo_list
+
     @property
     def storage_list(self):
         return self.storage_list
-    
-    
+
     def check(self, cargo):
-        if cargo._height >= self.height\
-        or cargo._length >= self.length\
-        or cargo._width >= self.width\
-        or cargo._volume >= self._volume_available\
-        or cargo._mass >=self._carrying_available:
-            return False
-        else:
-            return True
-                    
+        return cargo.height <= self.height and cargo.length <= self.length and cargo.width <= self.width and \
+               cargo.volume <= self.volume_available and cargo.mass <= self.carrying_available
+
     def load(self, cargo):
         if self.check(cargo) is not False:
             self.cargo_list.append(cargo)
-            self._carrying_available-=cargo._mass
-            self._volume_available-=cargo._volume
+            self._carrying_available -= cargo.mass
+            self._volume_available -= cargo.volume
         else:
             self.storage_list.append(cargo)
 
     def drop(self, cargo):
-        self._carrying_available+=cargo._mass
-        self._volume_available+=cargo._volume
-        cargo = self._cargo_list.pop
-        self._storage_list.append(cargo)
+        self._carrying_available += cargo.mass
+        self._volume_available += cargo.volume
+        cargo = self.cargo_list.pop
+        self.storage_list.append(cargo)
 
 
 if __name__ == '__main__':
-
-    Box = Cargo(5,5,5,125)
-    Vagon = Carriage(10,10,10,100)
+    Box = Cargo(5, 5, 5, 125)
+    Vagon = Carriage(10, 10, 10, 100)
     Vagon.load(Box)
     Vagon.drop(Box)
