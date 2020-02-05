@@ -4,10 +4,6 @@ import random
 def gen(a, b):
     return random.uniform(a, b)
 
-
-storage_list = []
-
-
 class Cargo:
     def __init__(self, height, length, width, mass):
         self._height = height
@@ -153,7 +149,7 @@ class Carriage:
     def drop(self, cargo):
         self._carrying_available += cargo.mass
         self._volume_available += cargo.volume
-        cargo = self.cargo_list.pop
+        self.cargo_list.pop()
 
     def moving(self, x, y):
         self._x += x
