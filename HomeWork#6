@@ -4,6 +4,10 @@ import random
 def gen(a, b):
     return random.uniform(a, b)
 
+
+storage_list = []
+
+
 class Cargo:
     def __init__(self, height, length, width, mass):
         self._height = height
