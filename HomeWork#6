@@ -169,4 +169,3 @@ if __name__ == '__main__':
     vagon.load(box2)
     vagon.drop(box1)
     vagon.moving(100, 50)
-
