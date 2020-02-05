@@ -160,7 +160,7 @@ if __name__ == '__main__':
     vagon = Carriage(3, 20, 3, 100000)
     box1 = Box(1, 1, 1, 25)
     box2 = Box.create()
-    print(box2.__str__())
+    print(box2)
     vagon.load(box1)
     vagon.load(box2)
     vagon.drop(box1)
