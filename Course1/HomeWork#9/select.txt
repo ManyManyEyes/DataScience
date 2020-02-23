@@ -1,0 +1,1 @@
+SELECT Vagon.id FROM Vagon v LEFT JOIN CARGO c ON v.id = c.id WHERE v.id = c.vagon_id and v.id  AND c.id IS NULL

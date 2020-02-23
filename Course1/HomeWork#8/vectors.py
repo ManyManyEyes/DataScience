@@ -16,7 +16,7 @@ class Vector:
         return (self.a**2+self.b**2+self.c**2)**.5
     
     def __bool__(self):
-        return __abs__(self)>0
+        return self.__abs__()>0
 
     def __str__(self):
         return f"{self.a},{self.b},{self.c}"

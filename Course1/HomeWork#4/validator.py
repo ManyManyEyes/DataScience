@@ -2,11 +2,7 @@ import re
 
 
 def redactor(line):
-    return line.replace("\t", ",")\
-        .replace(";", ",")\
-        .replace("-", ",")\
-        .replace(",,", ",")\
-        .split(",")
+    return re.split(r'[\n\t;-]+', line)
 
 
 def validator_id(userlist):
